@@ -1,11 +1,11 @@
 Ball's Adventure 01
 ===================
 
-A very minimal HTML/JavaScript desktop game squeleton using P5.JS and PxGamepad.  
+A very minimal HTML/JavaScript desktop game squeleton using [P5.JS](https://p5js.org/) and [PxGamepad](https://github.com/thinkpixellab/PxGamepad).  
 Just plug your controller and open index.html to throw balls and jump on the walls!
 
-- Github : https://github.com/TouchyPunchy/ballsadventure_01  
-- Demo : [soon] http://labelcarrote.com/game/ballsadventure_01
+- Github : https://github.com/TouchyPunchy/ballsadventure_01 
+- Demo : http://labelcarrote.com/game/ballsadventure_01
 
 Features
 --------
