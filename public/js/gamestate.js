@@ -51,9 +51,9 @@ function GameState(gameManager){
 			var direction_y = this.gm.pad.leftStick.y > 0 ? 0 : 1;
 			var dx = this.player.isFacingLeft === true ? -1 : 1;
 			var ball = new Ball(
-				this.player.x,
+				this.player.x + this.player.width / 2,
 				this.player.y, 
-				dx * 24 + dx * this.player.dx * 2,
+				this.player.dx * 4,
 				-24 + this.player.dy * 0.3 + -24 * direction_y
 			);
 			this.balls.push(ball);
