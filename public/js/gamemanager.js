@@ -1,24 +1,31 @@
 // -----------------------
 // GameManager
 // -----------------------
-function GameManager(status){
-	
-	this.status = status;
+class GameManager{
 
-	// Actual state
-	this.state; 
+	constructor(status){
+		this.STATUS_TITLE = 0;
+		this.STATUS_GAME = 1;
 
-	// All game states
-	this.titleState = new TitleState(this);
-	this.gameState = new GameState(this);
-	this.endState = new EndState(this);
-	this.pauseState = new PauseState(this);
+		this.status = status;
 	
-	// Pad
-	this.pad = new PxGamepad();
-	this.gamePad = new GamePad();
+		// Actual state
+		this.state; 
+
+		// All game states
+		this.titleState = new TitleState(this);
+		this.gameState = new GameState(this);
+		this.endState = new EndState(this);
+		this.pauseState = new PauseState(this);
+		
+		// Pad
+		this.pad = new PxGamepad();
+		this.gamePad = new GamePad();
+
+		this.init();
+	}
 	
-	this.init = function(){
+	init(){
 		this.pad.start();	
 
 		if(this.status == 0)
@@ -27,34 +34,23 @@ function GameManager(status){
 			this.state = this.gameState;
 	}
 		
-	this.step = function(){
+	step(){
 		this.pad.update();
 		this.state.inputCheck();
 		this.state.update();
 		this.state.display(); 
 	}
 	
-	this.setState = function(state){
+	setState(state){
 		this.state = state;  
 	}
 
-	this.keyPressed = function(){
-		/*this.gamePad.keyPressed();
-		if(key === ' '){
-			var ball = new Ball(player.x,player.y,player.dx*2, -36 + player.dy* 0.3);
-			balls.push(ball);
-		}else if(keyCode === UP_ARROW || pxGamePad.buttons.b === true){
-			player.jump();
-		}*/
+	keyPressed(){
+		this.gamePad.keyPressed();
 	}
 
-	this.keyReleased = function(){
-		/*gamePad.keyReleased();
-		if(key !== ' ' || keyCode === UP_ARROW){
-			player.move(0);
-		}
-		return false;*/
+	keyReleased(){
+		this.gamePad.keyReleased();
+		return false;
 	}
-
-	this.init();
 }

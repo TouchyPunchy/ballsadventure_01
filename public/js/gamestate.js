@@ -1,52 +1,51 @@
 // -----------------------
 // GameState
 // -----------------------
-function GameState(gameManager){
+class GameState{
 
-	var BLOCKS_COUNT = 1;
-	var BALLS_COUNT = 1;
-	var GAMEPAD_STICK_THRESHOLD = 0.25;
+	constructor(gameManager){
+		// Constants
+		this.BLOCKS_COUNT = 1;
+		this.BALLS_COUNT = 1;
+		this.GAMEPAD_STICK_THRESHOLD = 0.25;
 
-	// Game manager
-	this.gm = gameManager;
+		// Game manager
+		this.gm = gameManager;
 
-	// Game objects
-	this.player = null;
-	this.blocks = [];
-	this.balls = [];
+		// Game objects
+		this.player = null;
+		this.blocks = [];
+		this.balls = [];
 
-	// this.lastPadState = null; // ?
+		this.init();
+	}
 
-	this.init = function(){
+	init(){
 		this.player = new Player(width / 2,height / 2);
-		for(var i = 0; i < BLOCKS_COUNT; i++)
+		for(var i = 0; i < this.BLOCKS_COUNT; i++)
 			this.blocks[i] = new Block(width * 2 / 3,height / 2);
 	}
 
-	this.inputCheck = function(){
-
-		// WIP add keyboard/gamepad
+	inputCheck(){
+		let direction = 0;
 		if(this.gm.pad.buttons.y === true)
 			this.gm.setState(this.gm.endState);
 
-		if(this.gm.pad.leftStick.x < -GAMEPAD_STICK_THRESHOLD)
+		if(this.gm.pad.leftStick.x < - this.GAMEPAD_STICK_THRESHOLD || this.gm.gamePad.state & this.gm.gamePad.DIR_LEFT) 
 			direction = -1;
 		
-		if(this.gm.pad.leftStick.x > GAMEPAD_STICK_THRESHOLD)
+		if(this.gm.pad.leftStick.x > this.GAMEPAD_STICK_THRESHOLD || this.gm.gamePad.state & this.gm.gamePad.DIR_RIGHT)
 			direction = 1;
-	
-		if(this.gm.pad.leftStick.x >= -GAMEPAD_STICK_THRESHOLD && this.gm.pad.leftStick.x <= GAMEPAD_STICK_THRESHOLD)
-			direction = 0;	
 		
 		this.player.move(direction);
 
 		for(var i = 0; i < this.blocks.length; i++)
 			this.blocks[i].move(direction);
 
-		if(this.gm.pad.buttons.a === true)
+		if(this.gm.pad.buttons.a === true || this.gm.gamePad.state & this.gm.gamePad.DIR_UP)
 			this.player.jump();
 
-		if(this.gm.pad.buttons.x === true){
+		if(this.gm.pad.buttons.x === true || this.gm.gamePad.state & this.gm.gamePad.KEY_A){
 			// ugly shit, sends ball(s)
 			var direction_y = this.gm.pad.leftStick.y > 0 ? 0 : 1;
 			var dx = this.player.isFacingLeft === true ? -1 : 1;
@@ -57,11 +56,10 @@ function GameState(gameManager){
 				-24 + this.player.dy * 0.3 + -24 * direction_y
 			);
 			this.balls.push(ball);
-			//console.log(dx);
 		}
 	}
 
-	this.update = function(){
+	update(){
 		var blocks_length = this.blocks.length,
 			balls_length = this.balls.length;
 		
@@ -74,35 +72,28 @@ function GameState(gameManager){
 			this.balls[i].update();
 	}
 
-	this.display = function(){
-
-		// ---- SHOW
-
-		var blocks_length = this.blocks.length,
-			balls_length = this.balls.length;
-
-		background(51);
-
-		fill(255);
+	display(){
+		
+		background(255,221,0);
+		fill(0);
 		noStroke();
-
+		
 		text("Game! press b!", 10, 20);
-
+		
 		this.player.show();
-
+		
+		let blocks_length = this.blocks.length;
 		for(var i = 0; i < blocks_length; i++)
 			this.blocks[i].show();
-
+		
+		let balls_length = this.balls.length;
 		for(var i = 0; i < balls_length; i++)
 			this.balls[i].show();
-
+		
 		// ---- CLEAN UP (THE BALLS)
-
 		for(var i = balls_length-1; i >= 0; i--){
 			if(this.balls[i].toDelete === true)
 				this.balls.splice(i,1);
 		}
 	}
-
-	this.init();
 }

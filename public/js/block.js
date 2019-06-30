@@ -1,19 +1,17 @@
-function Block(x,y){
+class Block{
+	
+	constructor(x,y){
+		this.x = x;
+		this.y = y;
+		this.dx = 0;
+		this.dy = 0;
+		this.width = 120;
+		this.length = 24;
+		this.dirx = 0;
+	}
 
-	this.x = x;
-	this.y = y;
-	this.dx = 0;
-	this.dy = 0;
-	this.width = 120;
-	this.length = 24;
-	this.dirx = 0;
-
-	this.update = function(){
-		//this.dy += this.GRAVITY;
-		//this.dx *= this.friction;
-
+	update(){
 		this.dx = this.dirx * 5;
-
 		this.x += this.dx;
 		this.y += this.dy;		
 
@@ -33,14 +31,13 @@ function Block(x,y){
 		}
 	}
 
-	this.show = function(){
+	show(){
 		fill(0);
-		stroke(255);
+		stroke(0);
 		rect(this.x, this.y, this.width, this.length);
 	}
 
-	this.move = function(direction){
+	move(direction){
 		this.dirx = - direction;
-		//this.x += - direction * this.dx;
 	}
 }

@@ -1,21 +1,18 @@
 // -----------------------
 // PauseState
 // -----------------------
-function PauseState(gameManager){
-	
-	this.gm = gameManager;  
-	
-	this.init = function(){
-	}
-	
-	this.inputCheck = function(){
-	}
-	
-	this.update = function(){
-	}
-	
-	this.display = function(){
-	}
+class PauseState{
 
-	this.init();
+	constructor(gameManager){
+		this.gm = gameManager;  
+	}
+	
+	inputCheck(){
+	}
+	
+	update(){
+	}
+	
+	display(){
+	}
 }

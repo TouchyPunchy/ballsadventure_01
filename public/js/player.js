@@ -1,21 +1,22 @@
-function Player(x,y){
+class Player{
+	
+	constructor(x,y){
+		this.GRAVITY = 2;
 
-	this.GRAVITY = 2;
+		this.x = x;
+		this.y = y;
+		this.dx = 0;
+		this.dy = 0;
+		this.dirx = 0;
+		this.width = 12;
+		this.length = 36;
+		this.friction = 0.8;
+		this.isJumping = false;
+		this.isFacingLeft = false;
+		console.log("new Player("+this.x+","+this.y+","+this.dx+""+this.dy+")");
+	}
 
-	this.x = x;
-	this.y = y;
-	this.dx = 0;
-	this.dy = 0;
-	this.dirx = 0;
-	this.width = 12;
-	this.length = 36;
-	this.friction = 0.8;
-	this.isJumping = false;
-	this.isFacingLeft = false;
-
-	console.log("new Player("+this.x+","+this.y+","+this.dx+""+this.dy+")");
-
-	this.update = function(){
+	update(){
 
 		this.dx += this.dirx * 3;//* 5;
 		this.dy += this.GRAVITY;
@@ -41,24 +42,22 @@ function Player(x,y){
 		}
 
 		this.dx = this.dx * this.friction;
-
 	}
 
-	this.show = function(){
-		fill(255);
+	show(){
+		fill(0);
 		rect(this.x, this.y, this.width, this.length);
 	}
 
-	this.move = function(direction){
+	move(direction){
 		this.dirx = direction;
 		if(this.dirx < 0)
 			this.isFacingLeft = true;
 		else if(this.dirx > 0)
 			this.isFacingLeft = false;
-		/*this.dx = direction * 7;*/
 	}
 
-	this.jump = function (){
+	jump(){
 		if(this.isJumping === false){
 			this.dy = -32;
 			this.isJumping = true;

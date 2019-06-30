@@ -1,27 +1,24 @@
 // -----------------------
 // EndState
 // -----------------------
-function EndState(gameManager){
+class EndState{
 	
-	this.gm = gameManager;
-	
-	this.init = function(){
+	constructor(gameManager){
+		this.gm = gameManager;
 	}
 	
-	this.inputCheck = function(){
+	inputCheck(){
 		if(this.gm.pad.buttons.a === true)
 			this.gm.setState(this.gm.titleState);
 	}
 	
-	this.update = function(){
+	update(){
 	}
 	
-	this.display = function(){
+	display(){
 		background(0);
 		noStroke();
 		fill(255);
 		text("End! press y!", 10, 20);
 	}
-	
-	this.init();
 }

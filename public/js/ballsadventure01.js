@@ -7,19 +7,12 @@
 // @author TouchyPunchy
 // -----------------------
 
-// Canvas size
-var W = 1200;
-var H = 600;
 var gameManager;
 
 // ---- SETUP
 
 function setup(){
-	W = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-	H = window.innerHeight || document.documentElement.clientHeight	|| document.body.clientHeight;
-	W = W - 32;
-	H = H - 18;
-	createCanvas(W,H);
+	const canvas = createCanvas(windowWidth,windowHeight);
 	gameManager = new GameManager(0);
 }
 

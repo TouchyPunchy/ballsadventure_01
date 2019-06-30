@@ -1,17 +1,19 @@
-function Ball(x,y,dx,dy){
+class Ball{
+	
+	constructor(x,y,dx,dy){
+		this.GRAVITY = 2;
 
-	this.GRAVITY = 2;
+		this.x = x;
+		this.y = y;
+		this.r = 20,
+		this.dx = dx;
+		this.dy = dy;
+		this.friction = 0.005;
+		this.toDelete = false;
+		//console.log("new Ball("+this.x+","+this.y+","+this.dx+","+this.dy+")");
+	}
 
-	this.x = x;
-	this.y = y;
-	this.r = 20,
-	this.dx = dx;
-	this.dy = dy;
-	this.friction = 0.005;
-	this.toDelete = false;
-	//console.log("new Ball("+this.x+","+this.y+","+this.dx+","+this.dy+")");
-
-	this.update = function(){
+	update(){
 		this.dy += this.GRAVITY;
 		//this.dx *= this.friction;
 
@@ -35,11 +37,12 @@ function Ball(x,y,dx,dy){
 		}
 	}
 
-	this.show = function(){
+	show(){
 		noStroke();
-		fill(250,0,200,150);
+		//fill(250,0,200,150);
+		//fill(0,25,255);
+		fill(0);
 		//stroke(255);
 		ellipse(this.x, this.y, this.r, this.r);
 	}
-
 }
