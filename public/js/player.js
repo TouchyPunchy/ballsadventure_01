@@ -13,7 +13,6 @@ class Player{
 		this.friction = 0.8;
 		this.isJumping = false;
 		this.isFacingLeft = false;
-		console.log("new Player("+this.x+","+this.y+","+this.dx+""+this.dy+")");
 	}
 
 	update(){

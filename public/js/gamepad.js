@@ -22,7 +22,6 @@ class GamePad{
 	}
 	
 	keyPressed(){
-		//console.log("key : " + keyCode,);
 		if(keyCode === UP_ARROW)
 			this.state = this.state | this.DIR_UP;
 		if(keyCode === DOWN_ARROW)
@@ -33,7 +32,6 @@ class GamePad{
 			this.state = this.state | this.DIR_RIGHT;
 		if(key === ' ')
 			this.state = this.state | this.KEY_A;
-		//console.log('++ '+this.state);
 	}
 
 	keyReleased(){
@@ -47,6 +45,5 @@ class GamePad{
 			this.state = this.state & (0xFFFF ^ this.DIR_RIGHT);
 		if (key === ' ')
 			this.state = this.state & (0xFFFF ^ this.KEY_A);
-		//console.log('- '+this.state);
 	}
 }

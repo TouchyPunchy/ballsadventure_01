@@ -2,7 +2,6 @@ class Ball{
 	
 	constructor(x,y,dx,dy){
 		this.GRAVITY = 2;
-
 		this.x = x;
 		this.y = y;
 		this.r = 20,
@@ -10,7 +9,6 @@ class Ball{
 		this.dy = dy;
 		this.friction = 0.005;
 		this.toDelete = false;
-		//console.log("new Ball("+this.x+","+this.y+","+this.dx+","+this.dy+")");
 	}
 
 	update(){
@@ -39,10 +37,7 @@ class Ball{
 
 	show(){
 		noStroke();
-		//fill(250,0,200,150);
-		//fill(0,25,255);
 		fill(0);
-		//stroke(255);
 		ellipse(this.x, this.y, this.r, this.r);
 	}
 }

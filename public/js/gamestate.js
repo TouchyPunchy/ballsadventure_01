@@ -48,7 +48,6 @@ class GameState{
 		if(this.gm.pad.buttons.x === true || this.gm.gamePad.state & this.gm.gamePad.KEY_A){
 			// ugly shit, sends ball(s)
 			var direction_y = this.gm.pad.leftStick.y > 0 ? 0 : 1;
-			var dx = this.player.isFacingLeft === true ? -1 : 1;
 			var ball = new Ball(
 				this.player.x + this.player.width / 2,
 				this.player.y, 
@@ -60,16 +59,11 @@ class GameState{
 	}
 
 	update(){
-		var blocks_length = this.blocks.length,
-			balls_length = this.balls.length;
-		
 		this.player.update();
-
-		for(var i = 0; i < blocks_length; i++)
-			this.blocks[i].update();
-		
-		for(var i = 0; i < balls_length; i++)
-			this.balls[i].update();
+		for(let block of this.blocks)
+			block.update();
+		for(let ball of this.balls)
+			ball.update();
 	}
 
 	display(){
@@ -82,15 +76,14 @@ class GameState{
 		
 		this.player.show();
 		
-		let blocks_length = this.blocks.length;
-		for(var i = 0; i < blocks_length; i++)
-			this.blocks[i].show();
-		
-		let balls_length = this.balls.length;
-		for(var i = 0; i < balls_length; i++)
-			this.balls[i].show();
-		
+		for(let block of this.blocks)
+			block.show();
+
+		for(let ball of this.balls)
+			ball.show();
+			
 		// ---- CLEAN UP (THE BALLS)
+		let balls_length = this.balls.length;
 		for(var i = balls_length-1; i >= 0; i--){
 			if(this.balls[i].toDelete === true)
 				this.balls.splice(i,1);
